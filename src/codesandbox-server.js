@@ -8,8 +8,8 @@ const WebSocket = require("ws");
 const chokidar = require("chokidar");
 const url = require("url");
 
-module.exports.start = function (options = { port: 8080, watchDir: "." }) {
-  const { port, watchDir } = options;
+module.exports.start = function (options = { entryFile: 'App.jsx', port: 8080, watchDir: "." }) {
+  const { entryFile, port, watchDir } = options;
   const app = express();
   const httpServer = http.createServer(app);
   const wss = new WebSocket.Server({ server: httpServer });
@@ -29,7 +29,7 @@ module.exports.start = function (options = { port: 8080, watchDir: "." }) {
   //
   function updateCode(ws) {
     console.debug("updateCode");
-    const buffer = fs.readFileSync("./files/Test.jsx");
+    const buffer = fs.readFileSync(entryFile);
     const { code } = babel.transformSync(buffer.toString(), {
       presets: ["@babel/preset-env", "@babel/preset-react"]
     });
