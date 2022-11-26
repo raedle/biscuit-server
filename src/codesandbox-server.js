@@ -21,7 +21,7 @@ module.exports.start = function (options = { entryFile: 'App.jsx', port: 8080, w
   function getBiscuitUrl() {
     const sandboxUrl = getSandboxUrl();
     const parsedUrl = url.parse(sandboxUrl);
-    const protocol = "biscuit:";
+    const protocol = "biscuit-code:";
     parsedUrl.protocol = protocol;
     parsedUrl.href = parsedUrl.href.replace(/^[^:]+:/, protocol);
     return parsedUrl.href;
